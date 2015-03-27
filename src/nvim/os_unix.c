@@ -189,6 +189,8 @@ void mch_copy_sec(char_u *from_file, char_u *to_file)
 vim_acl_T mch_get_acl(char_u *fname)
 {
   vim_acl_T ret = NULL;
+
+  ret = (vim_acl_T *) acl_get_file((char *) fname, ACL_TYPE_ACCESS);
   return ret;
 }
 
@@ -199,12 +201,16 @@ void mch_set_acl(char_u *fname, vim_acl_T aclent)
 {
   if (aclent == NULL)
     return;
+  else
+    acl_set_file((char *) fname, ACL_TYPE_ACCESS, aclent);
 }
 
 void mch_free_acl(vim_acl_T aclent)
 {
   if (aclent == NULL)
     return;
+  else
+    acl_free(aclent);
 }
 #endif
 

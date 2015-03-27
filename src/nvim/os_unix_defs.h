@@ -229,7 +229,8 @@
 
 #define HAVE_DUP                /* have dup() */
 
-/* We have three kinds of ACL support. */
-#define HAVE_ACL (HAVE_POSIX_ACL || HAVE_SOLARIS_ACL || HAVE_AIX_ACL)
+#if defined(HAVE_SYS_ACL_H) || defined(HAVE_SYS_ACCESS_H)
+#define HAVE_ACL
+#endif
 
 #endif  // NVIM_OS_UNIX_DEFS_LEGACY_H
